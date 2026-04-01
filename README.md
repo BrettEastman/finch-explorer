@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Finch Sandbox Explorer
 
-## Getting Started
+A Next.js application that connects to [Finch](https://tryfinch.com)'s Sandbox API, allowing you to browse employer data across different payroll providers.
 
-First, run the development server:
+## What It Does
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Select a payroll provider (Gusto, BambooHR, Rippling, etc.) and establish a sandbox connection
+- View company information: legal name, EIN, entity type, departments, locations
+- Browse the employee directory and select individual employees
+- View each employee's personal information (name, DOB, contact info, address) and employment details (title, department, start date, income, work location)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Prerequisites
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- [Node.js](https://nodejs.org/) 18+
+- A [Finch](https://dashboard.tryfinch.com/signup) account with sandbox credentials
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Setup
 
-## Learn More
+1. Clone the repository:
 
-To learn more about Next.js, take a look at the following resources:
+   ```bash
+   git clone https://github.com/YOUR_USERNAME/finch-explorer.git
+   cd finch-explorer
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. Install dependencies:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   ```bash
+   npm install
+   ```
 
-## Deploy on Vercel
+3. Copy the example environment file and add your Finch sandbox credentials:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   ```bash
+   cp .env.example .env.local
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+   Edit `.env.local` with your credentials:
+
+   ```
+   FINCH_CLIENT_ID=your_client_id_here
+   FINCH_CLIENT_SECRET=your_client_secret_here
+   ```
+
+4. Start the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+5. Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## Architecture
+
+### Token Storage
+
+The Finch access token is stored **server-side only** in a module-scoped variable within the Next.js server runtime. It is never sent to or accessible from the browser. The client communicates exclusively through Next.js API routes, which proxy requests to the Finch API with the stored token.
+
+### Product Scoping
+
+When creating a sandbox connection, the app explicitly requests only these products: `company`, `directory`, `individual`, `employment`. This means the access token **cannot** call `/payment` or `/pay-statement` endpoints -- the restriction is enforced at the token level by Finch.
+
+### Null Field Handling
+
+Every data field is rendered through a `FieldValue` component. When a field value is `null` or `undefined`, it displays a muted italic "N/A" rather than blank space, making it clear the data was requested but not available from the provider.
+
+### Provider Error Handling
+
+If a provider does not implement a specific endpoint, the API routes detect the error (HTTP 501 or "not implemented" message) and return a structured error response. The frontend displays a custom error banner explaining that the selected provider does not support that particular endpoint.
+
+## Tech Stack
+
+- **Framework**: Next.js 15 (App Router)
+- **Language**: TypeScript
+- **API Client**: `@tryfinch/finch-api` (official Finch SDK)
+- **Styling**: Vanilla CSS with CSS custom properties
