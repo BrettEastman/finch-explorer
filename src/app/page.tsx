@@ -38,6 +38,8 @@ export default function Home() {
     if (!selectedProvider) return;
 
     setIsConnecting(true);
+    setIsConnected(false);
+    setConnectedProvider(null);
     setConnectError(null);
     setCompany(null);
     setCompanyError(null);

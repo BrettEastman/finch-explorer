@@ -33,10 +33,13 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ success: true, provider_id });
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : "Failed to connect";
+    const status = typeof err === "object" && err !== null && "status" in err
+      ? (err as { status: number }).status
+      : 500;
     console.error("Connect error:", err);
     return NextResponse.json(
       { error: true, message, code: "connect_failed" },
-      { status: 500 }
+      { status }
     );
   }
 }

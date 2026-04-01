@@ -11,6 +11,7 @@ export const PROVIDERS: Provider[] = [
   { id: "paycom", name: "Paycom" },
   { id: "paylocity", name: "Paylocity" },
   { id: "adp_workforce_now", name: "ADP Workforce Now" },
+  { id: "rippling", name: "Rippling" },
   { id: "zenefits", name: "Zenefits" },
   { id: "trinet", name: "TriNet" },
   { id: "square_payroll", name: "Square Payroll" },
