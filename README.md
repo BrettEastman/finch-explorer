@@ -19,7 +19,7 @@ A Next.js application that connects to [Finch](https://tryfinch.com)'s Sandbox A
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/YOUR_USERNAME/finch-explorer.git
+   git clone https://github.com/BrettEastman/finch-explorer.git
    cd finch-explorer
    ```
 
