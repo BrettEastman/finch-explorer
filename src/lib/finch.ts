@@ -16,11 +16,6 @@ export function getProviderId(): string | null {
   return storedProviderId;
 }
 
-export function clearToken() {
-  storedAccessToken = null;
-  storedProviderId = null;
-}
-
 export function getSandboxClient() {
   const clientId = process.env.FINCH_CLIENT_ID;
   const clientSecret = process.env.FINCH_CLIENT_SECRET;

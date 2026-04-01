@@ -4,11 +4,6 @@ export interface ApiError {
   code: string;
 }
 
-export interface ConnectResponse {
-  success: true;
-  provider_id: string;
-}
-
 export interface Location {
   line1: string | null;
   line2: string | null;
@@ -16,14 +11,6 @@ export interface Location {
   state: string | null;
   postal_code: string | null;
   country: string | null;
-}
-
-export interface CompanyAccount {
-  routing_number: string | null;
-  account_name: string | null;
-  institution_name: string | null;
-  account_type: string | null;
-  account_number: string | null;
 }
 
 export interface CompanyDepartment {
@@ -45,7 +32,6 @@ export interface CompanyData {
   ein: string | null;
   departments: CompanyDepartment[] | null;
   locations: Location[] | null;
-  accounts: CompanyAccount[] | null;
 }
 
 export interface DirectoryPerson {
