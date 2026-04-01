@@ -15,13 +15,12 @@ export async function POST(request: NextRequest) {
 
     const client = getSandboxClient();
 
-    const account = await client.sandbox.connections.accounts.create({
-      company_id: "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+    const connection = await client.sandbox.connections.create({
       provider_id,
       products: [...SANDBOX_PRODUCTS],
     });
 
-    const accessToken = account.access_token;
+    const accessToken = connection.access_token;
     if (!accessToken) {
       return NextResponse.json(
         { error: true, message: "No access token returned from Finch", code: "no_token" },

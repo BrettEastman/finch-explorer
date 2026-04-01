@@ -4,7 +4,7 @@ A Next.js application that connects to [Finch](https://tryfinch.com)'s Sandbox A
 
 ## What It Does
 
-- Select a payroll provider (Gusto, BambooHR, Rippling, etc.) and establish a sandbox connection
+- Select a payroll provider (Gusto, BambooHR, ADP, etc.) and establish a sandbox connection
 - View company information: legal name, EIN, entity type, departments, locations
 - Browse the employee directory and select individual employees
 - View each employee's personal information (name, DOB, contact info, address) and employment details (title, department, start date, income, work location)
@@ -70,7 +70,7 @@ If a provider does not implement a specific endpoint, the API routes detect the 
 
 ## Tech Stack
 
-- **Framework**: Next.js 15 (App Router)
+- **Framework**: Next.js 16 (App Router)
 - **Language**: TypeScript
 - **API Client**: `@tryfinch/finch-api` (official Finch SDK)
 - **Styling**: Vanilla CSS with CSS custom properties
