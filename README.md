@@ -2,6 +2,9 @@
 
 A Next.js application that connects to [Finch](https://tryfinch.com)'s Sandbox API, allowing you to browse employer data across different payroll providers.
 
+<img width="1225" height="496" alt="Screenshot 2026-04-01 at 7 42 49 PM" src="https://github.com/user-attachments/assets/c45e6079-c6ac-4812-9a16-0f35a14f517f" />
+<img width="1225" height="793" alt="Screenshot 2026-04-01 at 7 43 28 PM" src="https://github.com/user-attachments/assets/af3f9ca4-d00d-49ec-9b2c-0fcf048c9298" />
+
 ## What It Does
 
 - Select a payroll provider (Gusto, BambooHR, ADP, etc.) and establish a sandbox connection
