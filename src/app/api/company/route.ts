@@ -17,14 +17,15 @@ export async function GET() {
           message: "This provider does not support the Company endpoint.",
           code: "not_implemented",
         },
-        { status: 501 }
+        { status: 501 },
       );
     }
 
-    const message = err instanceof Error ? err.message : "Failed to fetch company data";
+    const message =
+      err instanceof Error ? err.message : "Failed to fetch company data";
     return NextResponse.json(
       { error: true, message, code: "fetch_failed" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

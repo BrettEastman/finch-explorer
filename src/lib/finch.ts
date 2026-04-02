@@ -1,5 +1,6 @@
 import Finch from "@tryfinch/finch-api";
 
+// These are used to store the access token and provider id in the server runtime, and only exist within the server runtime.
 let storedAccessToken: string | null = null;
 let storedProviderId: string | null = null;
 
