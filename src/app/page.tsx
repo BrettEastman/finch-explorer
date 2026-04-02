@@ -7,7 +7,7 @@ import type {
   IndividualData,
   EmploymentData,
 } from "@/lib/types";
-import { isApiError } from "@/lib/types";
+import { isApiError } from "@/lib/errors";
 import ProviderSelect from "@/components/ProviderSelect";
 import CompanyInfo from "@/components/CompanyInfo";
 import EmployeeDirectory from "@/components/EmployeeDirectory";

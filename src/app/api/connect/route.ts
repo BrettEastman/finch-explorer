@@ -8,11 +8,16 @@ export async function POST(request: NextRequest) {
 
     if (!provider_id) {
       return NextResponse.json(
-        { error: true, message: "provider_id is required", code: "bad_request" },
-        { status: 400 }
+        {
+          error: true,
+          message: "provider_id is required",
+          code: "bad_request",
+        },
+        { status: 400 },
       );
     }
 
+    // This is the new Finch API
     const client = getSandboxClient();
 
     const connection = await client.sandbox.connections.create({
@@ -23,8 +28,12 @@ export async function POST(request: NextRequest) {
     const accessToken = connection.access_token;
     if (!accessToken) {
       return NextResponse.json(
-        { error: true, message: "No access token returned from Finch", code: "no_token" },
-        { status: 500 }
+        {
+          error: true,
+          message: "No access token returned from Finch",
+          code: "no_token",
+        },
+        { status: 500 },
       );
     }
 
@@ -33,13 +42,14 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ success: true, provider_id });
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : "Failed to connect";
-    const status = typeof err === "object" && err !== null && "status" in err
-      ? (err as { status: number }).status
-      : 500;
+    const status =
+      typeof err === "object" && err !== null && "status" in err
+        ? (err as { status: number }).status
+        : 500;
     console.error("Connect error:", err);
     return NextResponse.json(
       { error: true, message, code: "connect_failed" },
-      { status }
+      { status },
     );
   }
 }

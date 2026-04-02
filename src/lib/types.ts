@@ -92,12 +92,3 @@ export interface EmploymentData {
   custom_fields: Record<string, unknown>[] | null;
   source_id: string | null;
 }
-
-export function isApiError(data: unknown): data is ApiError {
-  return (
-    typeof data === "object" &&
-    data !== null &&
-    "error" in data &&
-    (data as ApiError).error === true
-  );
-}
